@@ -62,3 +62,28 @@ test('starting again replaces the existing interval and resets elapsed time', ()
   assert.equal(display.textContent, '00:00');
   assert.equal(activeIntervals.size, 1);
 });
+
+test('reset stops the timer and clears elapsed time', () => {
+  let now = 0;
+  const activeIntervals = new Set();
+  let nextIntervalId = 0;
+  const display = { textContent: '' };
+  const timer = new GameTimer(display, {
+    now: () => now,
+    setIntervalFn: () => {
+      const intervalId = ++nextIntervalId;
+      activeIntervals.add(intervalId);
+      return intervalId;
+    },
+    clearIntervalFn: (intervalId) => activeIntervals.delete(intervalId),
+  });
+
+  timer.start();
+  now = 4200;
+  timer.render();
+  timer.reset();
+
+  assert.equal(display.textContent, '00:00');
+  assert.equal(timer.elapsedSeconds, 0);
+  assert.equal(activeIntervals.size, 0);
+});

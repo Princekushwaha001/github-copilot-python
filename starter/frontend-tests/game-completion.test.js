@@ -38,31 +38,31 @@ test('completion result stores only the requested game summary', () => {
     hintsUsed: 2,
     completed: true,
   });
+});
 
-  test('a new game resets hints, elapsed time, completion, and score submission state', () => {
-    const state = createGameState();
-    Object.assign(state, {
-      elapsedSeconds: 98,
-      hintsUsed: 3,
-      completed: true,
-      scoreSubmitted: true,
-    });
-
-    assert.equal(resetGameState(state, 'medium', 'game-2'), state);
-    assert.deepEqual(state, {
-      difficulty: 'medium',
-      elapsedSeconds: 0,
-      hintsUsed: 0,
-      completed: false,
-      gameId: 'game-2',
-      scoreSubmitted: false,
-    });
+test('a new game resets hints, elapsed time, completion, and score submission state', () => {
+  const state = createGameState();
+  Object.assign(state, {
+    elapsedSeconds: 98,
+    hintsUsed: 3,
+    completed: true,
+    scoreSubmitted: true,
   });
 
-  test('a completion can be recorded only once', () => {
-    const state = createGameState();
-    assert.equal(markGameCompleted(state, 42), true);
-    assert.equal(markGameCompleted(state, 99), false);
-    assert.equal(state.elapsedSeconds, 42);
+  assert.equal(resetGameState(state, 'medium', 'game-2'), state);
+  assert.deepEqual(state, {
+    difficulty: 'medium',
+    elapsedSeconds: 0,
+    hintsUsed: 0,
+    completed: false,
+    gameId: 'game-2',
+    scoreSubmitted: false,
   });
+});
+
+test('a completion can be recorded only once', () => {
+  const state = createGameState();
+  assert.equal(markGameCompleted(state, 42), true);
+  assert.equal(markGameCompleted(state, 99), false);
+  assert.equal(state.elapsedSeconds, 42);
 });
