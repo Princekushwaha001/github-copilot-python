@@ -1,51 +1,71 @@
-# GitHub Copilot Instructions — Sudoku Flask Project
+# GitHub Copilot Instructions — Flask Sudoku Project
 
-## Project Objective
-Refactor the existing Udacity Python Flask Sudoku application into a modern, modular, accessible, responsive web application.
+## Project Context
 
-## Technology Stack
-- Backend: Python 3, Flask
-- Frontend: HTML5, CSS3, JavaScript
-- Testing: pytest and Flask test client
-- Persistence: Browser localStorage
-- Version Control: Git and GitHub
+This repository contains a Flask-based Sudoku web application refactored from legacy Python code for the Udacity "Refactoring Legacy Code with Copilot" project.
 
-## Development Standards
-1. Follow PEP 8 for Python code.
-2. Use clear names, type hints, and docstrings.
-3. Separate Flask routes, Sudoku logic, and frontend code.
-4. Avoid unnecessary dependencies.
-5. Preserve existing functionality during refactoring.
-6. Handle invalid input and errors gracefully.
-7. Write reusable, testable functions.
-8. Do not modify unrelated files.
-9. Explain important architectural decisions.
+The application uses:
+- Python and Flask for backend routes and game state
+- HTML, CSS, and JavaScript for the frontend
+- pytest for Python testing
+- Node.js built-in test runner for JavaScript testing
+- Browser localStorage for leaderboard and theme preferences
 
-## Sudoku Requirements
-- Generate valid 9×9 Sudoku puzzles.
+## Code Style and Architecture
+
+- Follow PEP 8 conventions for Python.
+- Use descriptive names for functions and variables.
+- Keep game logic separate from Flask routes.
+- Prefer small, reusable functions and modules.
+- Avoid unnecessary changes to existing working code.
+- Preserve existing API contracts.
+- Use clear error messages and consistent validation.
+- Add comments where logic is non-obvious.
+
+## Sudoku Game Requirements
+
+- Every generated puzzle must have exactly one valid solution.
 - Support Easy, Medium, and Hard difficulties.
-- Verify each puzzle has exactly one solution.
-- Prevent editing original and hinted cells.
-- Provide immediate conflict feedback.
-- Support hints, answer checking, and completion detection.
+- Prevent editing original clues and revealed hints.
+- Highlight invalid moves and incorrect entries.
+- Keep the complete solution on the server.
+- Ensure hints reveal only one correct value at a time.
+- Verify completion using the backend.
+- Track elapsed time accurately.
+- Store only the top 10 fastest leaderboard entries.
+- Include player name, completion time, difficulty, and hint count.
+- Support responsive layouts and light/dark themes.
 
-## Frontend Requirements
-- Responsive design for mobile and desktop.
-- Alternating 3×3 square colors.
-- Accessible keyboard navigation and visible focus states.
-- Dark and light themes.
-- Game timer and persistent top 10 leaderboard.
+## Security and Accessibility
+
+- Validate all incoming API requests.
+- Never expose the complete Sudoku solution through an API.
+- Use safe DOM manipulation instead of inserting untrusted HTML.
+- Preserve keyboard accessibility and visible focus indicators.
+- Ensure text remains readable in light and dark modes.
 
 ## Testing Requirements
-- Establish baseline pytest tests before refactoring.
-- Run tests after every major change.
-- Test Sudoku validation and uniqueness.
-- Test Flask endpoints and error handling.
-- Add regression tests for fixed bugs.
 
-## Copilot Collaboration
-- Explain proposed changes before implementing them.
-- Make incremental changes.
-- Do not claim tests pass unless they have been executed.
-- Ask for approval before making major architectural changes.
-- Prioritize correctness, readability, and maintainability.
+Run Python tests using:
+
+`python -m pytest -v`
+
+Run JavaScript tests using:
+
+`node --test frontend-tests/*.test.js`
+
+- Preserve existing passing tests.
+- Add regression tests when fixing defects.
+- Do not claim tests pass unless they have actually been executed.
+
+## Responsible Copilot Usage
+
+- Treat Copilot-generated code as a proposal, not automatically correct.
+- Review suggestions for correctness, maintainability, and security.
+- Modify or reject suggestions that violate project requirements.
+- Document meaningful human decisions when evaluating generated code.
+- Do not introduce unrelated functionality during focused fixes.
+
+## Current Maintenance Constraint
+
+The Sudoku application has already passed the Udacity code quality, UI, game logic, and interactive feature criteria. Avoid modifying these accepted components unless a specific defect requires it.

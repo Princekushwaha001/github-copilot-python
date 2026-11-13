@@ -13,6 +13,13 @@ A browser-based Sudoku game built on a small Flask backend. The project began as
 - Light/dark theme preference and a Top 10 fastest-times leaderboard saved in browser `localStorage`.
 - Accessible labels and status feedback, with responsive desktop and mobile layouts.
 
+## Requirements
+
+- Python 3
+- Flask (installed from `starter/requirements.txt`)
+- Node.js with the built-in `node:test` runner (Node.js 18 or newer)
+- A modern web browser
+
 ## Technology
 
 - Python 3 and Flask
@@ -34,17 +41,29 @@ python app.py
 
 Open [http://127.0.0.1:5555](http://127.0.0.1:5555). Flask listens on port **5555**.
 
+## How to play
+
+1. Choose Easy, Medium, or Hard, then select **New game**.
+2. Fill open cells with digits 1–9. The original clues and revealed hints are locked.
+3. Use the arrow keys to move between cells. Conflicting entries are highlighted as you play.
+4. Select **Check** to mark entries that do not match the solution, or **Hint** to reveal and lock one correct cell.
+5. Solve the complete board to stop the timer and see the completion message. Enter a name if prompted to submit the result to the Top 10 leaderboard saved in this browser.
+6. Use the theme button to switch between light and dark modes.
+
 ## Tests
 
-Run the complete Python suite from `starter`:
+Run both test suites from the repository root in PowerShell:
 
 ```powershell
 python -m pytest -v
+node --test starter/frontend-tests/*.test.js
 ```
 
-Run the frontend JavaScript tests from the same directory (Node.js required):
+The root `pytest.ini` configures collection and the `starter` import path, so the Python command works from the repository root. If you prefer to run both suites from `starter`, use:
 
 ```powershell
+cd starter
+python -m pytest -v
 node --test frontend-tests/*.test.js
 ```
 
